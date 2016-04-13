@@ -36,9 +36,7 @@ var Requester = function () {
 
 		this.theme = theme;
 		this.key = key;
-		this.request = new Proxy(this.request, { apply: function apply(func, context, argList) {
-				console.log('requesting ' + context.theme + ' news');return func.apply(context, argList);
-			} });
+		// this.request = new Proxy(this.request, {apply: function(func, context, argList){console.log('requesting ' + context.theme + ' news'); return func.apply(context, argList);}})
 	}
 
 	_createClass(Requester, [{
