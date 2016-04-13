@@ -1,0 +1,41 @@
+body {
+	background-color: #383436;
+}
+
+p, span {
+	color: #ccc;
+}
+
+a {
+	color: #a06711;
+	text-decoration: none;
+}
+
+.item:not(:first-child) {
+	border-top: 1px solid #ccc;
+}
+
+.item {
+	padding-bottom: 0.83em;
+}
+
+.title {
+	margin: 0.5em 0;
+}
+
+.dropdown {
+   width: 100%;
+   height: 34px;
+   overflow: hidden;
+   background-color: gray;
+   border: none;
+}
+
+main .item {
+	opacity: 0;
+	transition: opacity 0.15s ease-in;
+}
+
+main.show .item {
+	opacity: 1;
+}
