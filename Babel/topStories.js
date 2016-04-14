@@ -49,15 +49,15 @@ class Displayer {
 	}
 
 	createItem(item){
-		var section = `<section class="item">
+		var section = `<div class="item">
 	        <h2 class="title"><a href="${item.url}">${item.title}</a></h2>
-	        <article class="content">
+	        <div class="content">
 	          <p class="text">${item.abstract}</p>
-	        </article>
+	        </div>
 	        <div class="info">
 	          <span class="author">${item.byline}</span>
 	        </div>
-	      </section>`;
+	      </div>`;
 		return section;
 	}
 }

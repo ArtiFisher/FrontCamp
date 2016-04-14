@@ -79,7 +79,7 @@ var Displayer = function () {
 	}, {
 		key: 'createItem',
 		value: function createItem(item) {
-			var section = '<section class="item">\n\t        <h2 class="title"><a href="' + item.url + '">' + item.title + '</a></h2>\n\t        <article class="content">\n\t          <p class="text">' + item.abstract + '</p>\n\t        </article>\n\t        <div class="info">\n\t          <span class="author">' + item.byline + '</span>\n\t        </div>\n\t      </section>';
+			var section = '<div class="item">\n\t        <h2 class="title"><a href="' + item.url + '">' + item.title + '</a></h2>\n\t        <div class="content">\n\t          <p class="text">' + item.abstract + '</p>\n\t        </div>\n\t        <div class="info">\n\t          <span class="author">' + item.byline + '</span>\n\t        </div>\n\t      </div>';
 			return section;
 		}
 	}]);
