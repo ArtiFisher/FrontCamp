@@ -17,15 +17,27 @@ module.exports = function(grunt) {
         separator: ';'
       },
       dist: {
-        src: ['node_modules/fetch-polyfill/fetch.js', 'dist/transpiled.js'],
+        src: ['dist/*.js'],
         // dest: 'dist/<%= pkg.name %>.js'
         dest: 'dist/fullScript.js'
       }
+    },
+    uglify: {
+      polyfills: {
+        files: {
+          'dist/polyfills.min.js': ['resources/promise.js', 'resources/fetch.js']
+        }
+      }
+    },
+    clean: {
+      build: ['dist']
     }
   });
   grunt.loadNpmTasks('grunt-babel');
   grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
 
-  grunt.registerTask('default', ['babel', 'concat']);
+  grunt.registerTask('default', ['clean', 'babel', 'uglify', 'concat']);
 
 };
