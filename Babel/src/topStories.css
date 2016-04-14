@@ -31,11 +31,11 @@ a {
    border: none;
 }
 
-main .item {
+div .item {
 	opacity: 0;
 	transition: opacity 0.15s ease-in;
 }
 
-main.show .item {
+div.show .item {
 	opacity: 1;
 }
