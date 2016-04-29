@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Top Stories</title>
+    <link rel="stylesheet" href="topStories.css">
+  </head>
+  <body>
+    <select class="dropdown" name="themeSelector" id="dropdown">
+      <option value="home">home</option>
+      <option value="world">world</option>
+      <option value="national">national</option>
+      <option value="politics">politics</option>
+      <option value="nyregion">nyregion</option>
+      <option value="business" selected>business</option>
+      <option value="opinion">opinion</option>
+      <option value="technology">technology</option>
+      <option value="health">health</option>
+      <option value="sports">sports</option>
+      <option value="arts">arts</option>
+      <option value="fashion">fashion</option>
+      <option value="dining">dining</option>
+      <option value="travel">travel</option>
+      <option value="magazine">magazine</option>
+      <option value="realestate">realestate</option>
+    </select>
+    <main id="stories"></main>
+  </body>
+  <script type="text/javascript" src="topStories.js"></script>
+  <script type="text/javascript">
+    new Main(document.getElementById('stories'), document.getElementById('dropdown'), 'ed43227ea7d2b47a3757c4134e3e9c06:2:74941862');
+  </script>
+</html>
