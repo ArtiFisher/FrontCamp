@@ -4,55 +4,55 @@
 		constructor(container, dropdown, key){
 			if(!instance){
 				instance = this;
-				this.container = container;
-				this.dropdown = dropdown;
-				this.key = key;
-				// new Theme(this.container, 'business', this.key);
-				Factory.createTheme(this.container, 'business', this.key);
-				this.dropdown.addEventListener('input', e => Factory.createTheme(this.container, e.target.value, this.key));
-
-				// this.dropdown.addEventListener('input', e => new Theme(this.container, e.target.value, this.key));
+				this.mediator = new Mediator();
+				this.model = new Requester(key, this.mediator);
+				this.view = new Displayer(container, dropdown, this.mediator);
+				this.mediator.addListener(this.model, ['new theme']);
+				this.mediator.addListener(this.view, ['items']);
+				this.mediator.send('new theme', 'business');
 			}
 			return instance;
 		}
 	}
 
-	class Theme {
-		constructor(container, theme, key){
-			this.container = container;
-			this.theme = theme;
-			this.key = key;
-			this.container.classList.remove('show');
-			new Requester(theme, key).request()
-				.then(json => new Displayer(container, json.results).display());
-		}
-	}
-
 	class Requester {
-		constructor(theme, key){
-			this.theme = theme;
+		constructor(key, mediator){
+			this.mediator = mediator;
 			this.key = key;
-			this.request = new Proxy(this.request, {apply: function(func, context, argList){console.log('requesting ' + context.theme + ' news'); return func.apply(context, argList);}})
 		}
 
-		request() {
-			return fetch('http://api.nytimes.com/svc/topstories/v1/' + this.theme + '.json?api-key=' + this.key, {
+		receive(header, content){
+			if(header == 'new theme'){
+				this.request(content);
+			}
+		}
+
+		request(theme) {
+			return fetch('http://api.nytimes.com/svc/topstories/v1/' + theme + '.json?api-key=' + this.key, {
 				method: 'get'
 			})
-				.then(response => response.json());
+				.then(response => response.json())
+				.then(json => this.mediator.send('items', json.results));
 		}
 	}
 
 	class Displayer {
-		constructor(container, items){
+		constructor(container, dropdown, mediator) {
 			this.container = container;
-			this.items = items;
+			this.dropdown = dropdown;
+			this.mediator = mediator;
+			this.dropdown.addEventListener('input', e => this.mediator.send('new theme', e.target.value));
 		}
 
-		display(){
+		receive(header, content){
+			if(header == 'items'){
+				this.display(content);
+			}
+		}
+
+		display(items){
 			var HTML = '';
-			this.items.forEach(item => HTML += this.createItem(item));
-			//I don't like usage of innerHTML, but need to show ES6 templating
+			items.forEach(item => HTML += this.createItem(item));
 			this.container.innerHTML = HTML;
 			setTimeout(e => this.container.classList.add('show'), 0);
 		}
@@ -74,6 +74,24 @@
 	class Factory {
 		static createTheme(container, theme, key){
 			return new Theme(container, theme, key);
+		}
+	}
+
+	class Mediator {
+		constructor(){
+			this.mailList = {};
+		}
+		addListener(listener, events){
+			for(var i = 0, len = events.length; i < len; i++){
+				!this.mailList[events[i]] && (this.mailList[events[i]] = []);
+				this.mailList[events[i]].push(listener);
+			}
+		}
+		send(header, content){
+			var listeners = this.mailList[header];
+			for(var i = 0, len = listeners.length; i < len; i++){
+				listeners[i].receive(header, content);
+			}
 		}
 	}
 
