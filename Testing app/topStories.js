@@ -83,8 +83,10 @@
 		}
 		send(header, content){
 			var listeners = this.mailList[header];
-			for(var i = 0, len = listeners.length; i < len; i++){
-				listeners[i].receive(header, content);
+			if(listeners){
+				for(var i = 0, len = listeners.length; i < len; i++){
+					listeners[i].receive(header, content);
+				}
 			}
 		}
 	}

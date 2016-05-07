@@ -23,10 +23,22 @@ describe('top stories', function(){
     expect(app.model.request).toHaveBeenCalledWith('technology');
   });
 
+  it('should not call request on wrong message', function(){
+    spyOn(app.model, 'request');
+    app.mediator.send('abrakadabra', 'technology');
+    expect(app.model.request).not.toHaveBeenCalled();
+  });
+
   it('should call display on message', function(){
     spyOn(app.view, 'display');
     app.mediator.send('items', 'content');
     expect(app.view.display).toHaveBeenCalled();
+  });
+
+  it('should not call display on wrong message', function(){
+    spyOn(app.view, 'display');
+    app.mediator.send('abrakadabra', 'content');
+    expect(app.view.display).not.toHaveBeenCalled();
   });
 
   it('should create items on display', function(){
