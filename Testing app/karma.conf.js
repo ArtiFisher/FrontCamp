@@ -28,7 +28,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['dots'],
+    // reporters: ['dots'],
 
 
     // web server port
@@ -37,7 +37,6 @@ module.exports = function(config) {
 
     // enable / disable colors in the output (reporters and logs)
     colors: true,
-
 
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
@@ -50,8 +49,8 @@ module.exports = function(config) {
     reporters: ['progress', 'coverage'],
 
     coverageReporter: {
-            type : 'html',
-            dir : 'coverage/'
+        type : 'html',
+        dir : 'coverage/'
     },
 
     // enable / disable watching file and executing tests whenever any file changes
