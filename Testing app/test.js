@@ -3,11 +3,30 @@
 describe('top stories', function(){
   let app,
     container,
-    dropdown;
+    dropdown,
+    artsOption;
+
+  function promisedJSON (body) {
+    var mockResponse = new window.Response(JSON.stringify(body), {
+      status: 200,
+      headers: {
+        'Content-type': 'application/json'
+      }
+    });
+    return new Promise((resolve, reject) => {
+      resolve(mockResponse);
+    })
+  }
 
   beforeEach(() => {
     container = document.createElement('div');
     dropdown = document.createElement('select');
+    artsOption = document.createElement('option');
+    artsOption.value = "arts";
+    dropdown.appendChild(artsOption);
+    spyOn(window, "fetch").and.returnValue(promisedJSON({
+      results: ["some", "results"]
+    }));
     app = new Main(container, dropdown, 'ed43227ea7d2b47a3757c4234e3e9c06:2:74941862');
   });
 
@@ -77,5 +96,37 @@ describe('top stories', function(){
     spyOn(app.model, 'request');
     app.mediator.send('new theme', 'technology');
     expect(app.model.request).toHaveBeenCalledWith('technology');
+  });
+
+  it('promises', done => {
+    var callback = done;
+    spyOn(app.view, 'display').and.callFake(function(){
+      callback();
+    });
+    app.mediator.send('new theme', 'technology');
+  });
+
+  it('add class async', done => {
+    let obj1 = {
+      url:'url1',
+      title:'title1',
+      abstract:'abstract1',
+      byline:'byline1'
+    };
+    new Promise((resolve, reject) => {
+      setTimeout(e => app.view.container.classList.contains('show') && resolve(), 10);
+    }).then(() => {
+      done()
+    })
+    app.view.display([obj1]);
+  });
+
+  it('dropdown click', () => {
+    spyOn(app.mediator, 'send');
+    artsOption.selected = true;
+    var evt = document.createEvent("HTMLEvents");
+    evt.initEvent("input");
+    app.view.dropdown.dispatchEvent(evt);
+    expect(app.mediator.send).toHaveBeenCalled();
   });
 });
