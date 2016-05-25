@@ -1,0 +1,14 @@
+
+{ "_id" : { "$oid" : "50b59cd75bed76f46522c364" }, "student_id" : 3, "class_id" : 12, "scores" :  50 } ] }
+
+{ "_id" : { "$oid" : "50b59cd75bed76f46522c36f" }, "student_id" : 4, "class_id" : 12, "scores" :  33 } ] }
+
+{ "_id" : { "$oid" : "50b59cd75bed76f46522c3b2" }, "student_id" : 18, "class_id" : 12, "scores" :  60 } ] }
+
+{ "_id" : { "$oid" : "50b59cd75bed76f46522c3be" }, "student_id" : 20, "class_id" : 12, "scores" :  38 } ] }
+
+{ "_id" : { "$oid" : "50b59cd75bed76f46522c3e3" }, "student_id" : 26, "class_id" : 12, "scores" :  37 } ] }
+
+{ "_id" : { "$oid" : "50b59cd75bed76f46522c3f3" }, "student_id" : 29, "class_id" : 12, "scores" :  32 } ] }
+
+{ "_id" : { "$oid" : "50b59cd75bed76f46522c40c" }, "student_id" : 33, "class_id" : 12, "scores" :  39 } ] }
