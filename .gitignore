@@ -31,3 +31,9 @@ node_modules
 
 # Optional REPL history
 .node_repl_history
+
+# replication/sharding
+replica1
+replica2
+sharded
+shardConf

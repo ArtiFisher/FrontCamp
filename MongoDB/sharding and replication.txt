@@ -1,0 +1,25 @@
+-----Replication-----
+
+mongod --replSet "replicaSet"
+mongod --replSet "replicaSet" --port 27018
+mongod --replSet "replicaSet" --port 27019
+
+mongo
+	rs.initiate()
+	rs.conf()
+	rs.add("EPBYMINW4862:27018")
+	rs.add("EPBYMINW4862:27019")
+	rs.status()
+
+-----Sharding-----
+
+mongod --configsvr --replSet configReplicaSet --port 27017 --dbpath "config1"
+mongod --configsvr --replSet configReplicaSet --port 27018 --dbpath "config2"
+mongod --configsvr --replSet configReplicaSet --port 27019 --dbpath "config3"
+mongos --configdb configReplSet/EPBYMINW4862:27017,EPBYMINW4862:27018,EPBYMINW4862:27019 --port 27020
+mongod --port 27021
+mongo --host EPBYMINW4862 --port 27020
+	sh.addShard( "EPBYMINW4862:27021" )
+	sh.enableSharding("test")
+	db.grades.createIndex({ "student_id":1, "class_id":1 })
+	sh.shardCollection("test.grades", { "student_id":1, "class_id":1 })
