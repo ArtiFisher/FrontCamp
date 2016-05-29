@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  form(id="inputForm", action="/article/add", method="post", enctype="multipart/form-data")
+    input(type="text" id="author" name="author" placeholder="author" required autocomplete="off")
+    input(type="text" id="title" name="title" placeholder="title" required autocomplete="off")
+    input(type="file" id="picture" name="picture")
+    textarea(type="text" id="content" name="content" placeholder="content" required autocomplete="off")
+    input(type="submit" id="button" value="Add article")

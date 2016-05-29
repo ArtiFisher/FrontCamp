@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1 Title
+  each val in articles
+    div #{val.author}
+    div #{val.title}
+    div #{val.date}
+    image(src="./images/#{val.picture}")
+  button(id="addArticle") Add article
+  span by Fisher
+  script(type="text/javascript" src="./javascripts/home.js")  
