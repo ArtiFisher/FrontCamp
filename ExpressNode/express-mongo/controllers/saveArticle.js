@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
-var articleSchema = require('../modules/article');
-var Article = mongoose.model('Article', articleSchema);
+var Article = require('../models/article');
 
-function save(req, cb){
+function saveArticle(req, cb){
   var inputObj = req.body;
-  inputObj.picture = req.file.filename;
+  req.file && (inputObj.picture = req.file.filename);
   new Article(inputObj).save(cb);
 }
 
-module.exports = save;
+module.exports = saveArticle;

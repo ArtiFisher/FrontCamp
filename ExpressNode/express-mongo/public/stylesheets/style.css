@@ -15,3 +15,12 @@ form {
 form > * {
   margin: 5px;
 }
+
+.item {
+	border: 1px solid gray;
+	margin-bottom: 5px;
+}
+
+img {
+	height: 100px;
+}

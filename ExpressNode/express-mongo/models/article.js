@@ -1,5 +1,10 @@
 var mongoose = require('mongoose');
+var connection = require('../helpers/db');
+var autoIncrement = require('mongoose-auto-increment');
 var Schema = mongoose.Schema;
+
+autoIncrement.initialize(connection);
+
 var Article = new Schema({
   title:  {
         type: String,
@@ -25,4 +30,8 @@ var Article = new Schema({
       }
 });
 
-module.exports = Article;
+Article.plugin(autoIncrement.plugin, 'Article');
+
+var model = mongoose.model('Article', Article);
+
+module.exports = model;

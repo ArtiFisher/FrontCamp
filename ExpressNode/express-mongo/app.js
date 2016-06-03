@@ -6,14 +6,14 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var login = require('./routes/login');
 var articles = require('./routes/articles');
 var mongoose = require('mongoose');
-// var articleSchema = require('./modules/article');
+var connection = require('./helpers/db');
+var passport = require('passport');
+var expressSession = require('express-session');
 
 var app = express();
-
-mongoose.connect('mongodb://localhost:27017/Blog');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,11 +26,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(expressSession({secret: 'secret'}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', routes);
 app.use('/newArticle', routes);
 app.use('/article', articles);
-app.use('/users', users);
+app.use('/login', login);
+app.use('/logout', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -62,6 +66,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;

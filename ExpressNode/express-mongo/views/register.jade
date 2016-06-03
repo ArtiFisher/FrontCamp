@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  form.form-signin(action="/login/adduser", method="post")
+    h2 Registration
+    input.input-username(type="text", name="username", placeholder="Nickname")
+    input.input-password(type="password", name="password", placeholder="Password")
+    button.submit(type="submit") Register
