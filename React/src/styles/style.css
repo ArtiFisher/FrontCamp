@@ -1,0 +1,32 @@
+body {
+	margin: 0;
+}
+
+body > div {
+	margin-top: 10px;
+}
+
+div > a {
+	margin: 10px;
+}
+
+ul {
+	list-style: none;
+	margin-bottom: 20px;
+	padding-left: 0;
+}
+
+li {
+	padding: 8px;
+	border-bottom: 1px solid gray;
+}
+
+li:last-child {
+	padding: 8px;
+	border-bottom: none;
+}
+
+a {
+    color: #337ab7;
+    text-decoration: none;
+}

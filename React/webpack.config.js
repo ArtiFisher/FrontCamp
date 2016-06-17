@@ -16,12 +16,17 @@ var config = {
     filename: 'bundle.js'
     //publicPath: './src/index'
   },
+  resolve: {
+    extensions: [ '', '.js', '.json', '.jsx', '.es6', '.babel', '.node'],
+    modulesDirectories: [ 'node_modules' ]
+  },
   // loaders: ['react-hot'],
   module: {
     loaders: [
       {
         test: /\.jsx?/,
         include: APP_DIR,
+        exclude: /node_modules/,
         loaders: ['babel']
       }
     ]

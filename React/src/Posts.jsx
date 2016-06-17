@@ -10,22 +10,29 @@ export default class Posts extends React.Component {
     };
   }
 
+  addArticle(article){
+    this.setState({posts: this.state.posts.concat(article)})
+  }
+
   componentWillMount() {
-    myFetch('http://localhost:8080/api/', (data) => this.setState({posts: data}));
+    myFetch('http://localhost:8080/articles', (data) => this.setState({posts: data}));
   }
 
   render() {
       return (
         <div>
+          <Link to={`/add`}>Add article</Link>
           <ul>
-              {this.state.posts.map((post, index) => {
-                  return <Link to={`/${index}`} key={index}>{ post.author }</Link>
-              })}
+              {
+                this.state.posts.map((post, index) => {
+                  return <li key={`/${post._id}`}><Link to={`/articles/${post._id}`}>{ post.title }</Link></li>;
+                })
+              }
           </ul>
-          {this.props.children}
+          {this.props.children && React.cloneElement(this.props.children, {
+              onNewArticle: this.addArticle.bind(this)
+            })}
         </div>
-
-
       );
   }
 }
