@@ -1,18 +1,13 @@
 var path = require('path');
+var webpack = require('webpack');
 
 var BUILD_DIR = path.join(path.resolve(__dirname), '/build');
 var APP_DIR = path.resolve(__dirname);
 
 var config = {
   entry: {
-    bundle: APP_DIR + '/src/app.js',
-    mock: APP_DIR + '/src/mock.js'
+    bundle: APP_DIR + '/src/app.js'
   },
-  // entry: [
-  //   'webpack-dev-server/client?http://localhost:3000',
-  //   'webpack/hot/only-dev-server',
-  //
-  // ],
   output: {
     path: BUILD_DIR,
     filename: '[name].js'
@@ -27,9 +22,8 @@ var config = {
       }
     ]
   }
-  // plugins: [
-  //   new webpack.HotModuleReplacementPlugin()
-  // ]
 };
+
+process.env.NODE_ENV && process.env.NODE_ENV.indexOf('test') > -1 && (config.entry.mock = APP_DIR + '/src/mock.js');
 
 module.exports = config;

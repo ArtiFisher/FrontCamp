@@ -1,29 +1,25 @@
-// import template from './posts.html';
 let $http;
-let PostResource;
+let $state;
+let Post;
 
 class PostsService {
-  constructor($resource) {
-    // $http = $injector.get('$http');
-    // PostResource = $resource('/data.json', {postId: '@id'})
-    PostResource = $resource('http://localhost:8000/articles/:id', {id: '@id'})
-    // PostResource = $resource('/data', {postId: '@id'})
+  constructor($resource, $injector) {
+    $state = $injector.get('$state');
+    Post = $resource('http://localhost:8010/articles/:id', {id: '@id'});
   }
 
-  // var User = $resource('/user/:userId', {userId:'@id'});
-  // User.get({userId:123}, function(user) {
-  //   user.abc = true;
-  //   user.$save();
-  // });
-
-  getData(){
-    //add, delete, get, query
-    return PostResource.query();
-    // return $http.get('/data.json').then((response) => response.data);
+  savePost(post){
+    Post.save(post, function(a,b,c){
+      $state.go('postlist');
+    });
   }
 
-  getItem(id){
-    return PostResource.get({'id':id});
+  getPosts(){
+    return Post.query();
+  }
+
+  getPost(id){
+    return Post.get({'id': id});
   }
 }
 

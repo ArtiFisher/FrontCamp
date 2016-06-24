@@ -15,7 +15,7 @@ router.get('/:id', function(req, res) {
 	}, {'_id': req.params.id});
 });
 
-router.post('/add', function(req, res) {
+router.post('/', function(req, res) {
   saveArticle(req, function(err, data){
   	res.json(data);
   });

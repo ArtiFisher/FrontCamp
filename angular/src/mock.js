@@ -1,4 +1,4 @@
-import angular from 'angular';
+import 'angular';
 import 'angular-mocks';
 
 angular.module('app-mock', ['ngMockE2E'])
@@ -11,11 +11,11 @@ angular.module('app-mock', ['ngMockE2E'])
   }];
   $httpBackend.whenGET(/\.html/).passThrough();
   $httpBackend.whenGET(/\.json/).passThrough();
-  $httpBackend.whenGET('/data').respond(data);
-  $httpBackend.whenGET(/data\/\w+$/).respond(function(method, url, params){
+  $httpBackend.whenGET('/articles').respond(data);
+  $httpBackend.whenGET(/articles\/\w+$/).respond(function(method, url, params){
     var result = data[params.id];
     return [200, result];
   });
 
 })
-// angular.module('app').requires.push('app-mock');
+angular.module('app').requires.push('app-mock');

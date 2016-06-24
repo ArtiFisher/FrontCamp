@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 // var port = process.env.PORT || 8080;
-var port = 8000;
+var port = 8010;
 
 app.use('/articles', articles);
 

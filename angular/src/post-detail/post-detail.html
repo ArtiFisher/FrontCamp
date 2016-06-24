@@ -1,2 +1,9 @@
-<span>id:{{postDetail.post['_id']}} text:{{postDetail.post.text}} author:{{postDetail.post.author}} content:{{postDetail.post.content}} counter:{{postDetail.post.counter}}</span>
-<!-- <button ng-click="postDetail.postClick()">Clicks: {{postDetail.post.text}}</button> -->
+<div class="post-details panel panel-default">
+	<div class="panel-heading">
+		<h4>{{postDetail.post.title}}</h3>
+	</div>
+	<div class="panel-body">
+		<p>{{postDetail.post.content}}</p>
+		<span class="text-info">Author: {{postDetail.post.author}}</span>
+	</div>
+</div>
